@@ -15,7 +15,7 @@ import AdminDashboard from "./admin/AdminDashboard";
 function App() {
   return (
     <div className="bg-black text-white min-h-screen">
-
+      
       <Navbar />
 
       <Routes>
@@ -24,7 +24,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
-        
         <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Services />} />
 
@@ -35,7 +34,6 @@ function App() {
       </Routes>
 
       <Footer />
-
     </div>
   );
 }

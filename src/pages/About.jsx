@@ -15,10 +15,10 @@ export default function About() {
         />
 
         <div>
-          <p className="text-lg text-gray-300 leading-8">
-            Professional photographer focused on portrait,
-            travel, cinematic and storytelling photography.
-          </p>
+         <p className="text-lg text-gray-300 leading-8">
+          I am a professional photographer focused on portrait, travel, cinematic, and storytelling visuals.
+          My work captures emotions, real moments, and unique perspectives that bring stories to life through every frame.
+        </p>
         </div>
 
       </div>

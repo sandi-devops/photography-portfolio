@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function AdminDashboard() {
+export default function Admin() {
   const [projects, setProjects] = useState([]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
