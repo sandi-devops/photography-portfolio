@@ -25,7 +25,7 @@ export default function Navbar() {
             to="/admin-login"
             className="bg-white text-black px-4 py-2 rounded-full hover:scale-105 transition"
           >
-            Login
+            ADMIN Login
           </Link>
 
         </div>

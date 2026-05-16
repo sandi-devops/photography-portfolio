@@ -9,8 +9,13 @@ import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
 
+
 import AdminLogin from "./admin/AdminLogin";
 import AdminDashboard from "./admin/AdminDashboard";
+
+import UserLogin from "./pages/auth/UserLogin";
+import UserRegister from "./pages/auth/UserRegister";
+
 
 function App() {
   return (
@@ -26,10 +31,16 @@ function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Services />} />
+          {/* DETAIL PAGE (ADD THIS) */}
+         {/* <Route path="/photo/:id" element={<PhotoDetail />} /> */}
 
         {/* ADMIN */}
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminDashboard />} />
+
+        <Route path="/login" element={<UserLogin />} />
+<Route path="/register" element={<UserRegister />} />
+
 
       </Routes>
 

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\AuthController;
 
 
 /*
@@ -17,14 +18,18 @@ use App\Http\Controllers\ProjectController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::post('/projects', [ProjectController::class, 'store']);
+    Route::put('/projects/{id}', [ProjectController::class, 'update']);
+    Route::delete('/projects/{id}', [ProjectController::class, 'destroy']);
+     Route::get('/user', [AuthController::class, 'getCurrentUser']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+
 });
 
 
-
 Route::get('/gallery', [GalleryController::class, 'index']);
-
 
 
 Route::get('/projects', [ProjectController::class, 'index']);
@@ -32,3 +37,6 @@ Route::post('/projects', [ProjectController::class, 'store']);
 Route::put('/projects/{id}', [ProjectController::class, 'update']);
 Route::post('/projects/{id}', [ProjectController::class, 'update']); // For form-data with _method
 Route::delete('/projects/{id}', [ProjectController::class, 'destroy']);
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);

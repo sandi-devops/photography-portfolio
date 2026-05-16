@@ -1,49 +1,76 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../api/axios";
 
 export default function AdminLogin() {
-  const [user, setUser] = useState("");
-  const [pass, setPass] = useState("");
-  const nav = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const login = () => {
-    if (user === "admin" && pass === "1234") {
-      localStorage.setItem("auth", "true");
-      nav("/admin");
-    } else {
-      alert("Invalid login");
+  const login = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await api.post("/login", {
+        email,
+        password,
+      });
+
+      console.log(res.data);
+
+      if (res.data.role !== "admin") {
+        alert("Not admin account");
+        return;
+      }
+
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", res.data.role);
+
+      navigate("/admin");
+
+    } catch (error) {
+      console.error(error);
+
+      alert(
+        error.response?.data?.message ||
+        "Login failed"
+      );
     }
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-black text-white">
-
-      <div className="bg-white/10 p-8 rounded-2xl w-[350px]">
-
-        <h1 className="text-2xl mb-5">Login</h1>
+    <div className="min-h-screen flex items-center justify-center bg-black pt-24">
+      <form
+        onSubmit={login}
+        className="bg-zinc-900 p-8 rounded-xl w-full max-w-md space-y-4 relative z-50"
+      >
+        <h1 className="text-white text-3xl text-center">
+          Admin Login
+        </h1>
 
         <input
-          placeholder="Username"
-          className="w-full p-3 mb-3 text-black"
-          onChange={(e) => setUser(e.target.value)}
+          type="email"
+          placeholder="Admin Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="p-3 w-full rounded bg-white text-black"
         />
 
         <input
           type="password"
           placeholder="Password"
-          className="w-full p-3 mb-4 text-black"
-          onChange={(e) => setPass(e.target.value)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="p-3 w-full rounded bg-white text-black"
         />
 
         <button
-          onClick={login}
-          className="w-full bg-white text-black py-3 rounded-xl"
+          type="submit"
+          className="bg-red-500 hover:bg-red-600 w-full py-3 rounded text-white"
         >
-          Login
+          Admin Login
         </button>
-
-      </div>
-
+      </form>
     </div>
   );
 }
